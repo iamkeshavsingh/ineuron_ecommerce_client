@@ -14,7 +14,7 @@ function Signup() {
     }
 
     return (
-        <Col>
+        <Col style={{ flex: 0.5 }}>
             <div className="text-center heading">
                 SignUp
             </div>

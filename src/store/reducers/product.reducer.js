@@ -1,8 +1,6 @@
 const INIT_STATE = {
-    isLoggedIn: true,
-    user: null
-}
-
+    products: []
+};
 
 function reducer(state = INIT_STATE, action) {
     return state;

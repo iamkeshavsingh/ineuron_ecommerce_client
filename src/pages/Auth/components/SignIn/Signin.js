@@ -13,7 +13,7 @@ function Signin() {
     }
 
     return (
-        <Col>
+        <Col style={{ flex: 0.4 }}>
             <div className="text-center heading">
                 SignIn
             </div>
