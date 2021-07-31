@@ -1,15 +1,19 @@
 import React from 'react'
 import { Button, Col, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux';
+import { signinAction } from '../../../../store/actions/auth/auth.action';
 
 import './Signin.css'
 
 function Signin() {
 
     var { register, handleSubmit, formState: { errors } } = useForm();
+    var dispatch = useDispatch();
+    var { signinError } = useSelector(({ auth }) => ({ signinError: auth.signinError }));
 
     function onSubmit(data) {
-        console.log(data)
+        dispatch(signinAction(data.username, data.password));
     }
 
     return (
@@ -17,6 +21,7 @@ function Signin() {
             <div className="text-center heading">
                 SignIn
             </div>
+            {signinError && <div>{signinError}</div>}
             <Form onSubmit={handleSubmit(onSubmit)} className="mt-3 p-2">
                 <Form.Group className="mb-3">
                     <Form.Label>Username</Form.Label>

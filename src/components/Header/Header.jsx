@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import './Header.css'
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, user }) {
     return (
         <Navbar bg="primary" variant="dark">
             <Container>
@@ -17,7 +17,7 @@ function Header({ isLoggedIn }) {
                             <React.Fragment>
                                 <Link className="link">
                                     <Navbar.Text>
-                                        Sign In As: John
+                                        Sign In As: {user.name}
                                     </Navbar.Text>
                                 </Link>
                                 <Link className="link">
@@ -42,6 +42,7 @@ var mapStateToProps = (state) => {
 
     return {
         isLoggedIn: state.auth.isLoggedIn,
+        user: state.auth.user
     }
 }
 
