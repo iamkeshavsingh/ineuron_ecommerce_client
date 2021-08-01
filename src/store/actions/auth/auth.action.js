@@ -1,4 +1,5 @@
 import { signin, storeToken, validateToken } from "../../../utils/auth.util";
+import { getCarts } from "../cart/cart.action";
 import { SIGNIN_FAILURE, SIGNIN_SUCCESS } from "./auth.constant";
 
 
@@ -31,6 +32,7 @@ export const initialAuthCheck = () => {
         var response = await validateToken();
         try {
             dispatch(signinSuccess(response.data))
+            dispatch(getCarts())
         }
         catch (err) {
             // Means token is invalid

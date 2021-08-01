@@ -7,7 +7,7 @@ function Cart({ carts, total }) {
     return (
         <React.Fragment>
             <Header />
-            <CartList total={total} carts={carts} />
+            {carts.length === 0 ? <h3 className="mt-4 text-center">Cart is empty</h3> : <CartList total={total} carts={carts} />}
         </React.Fragment>
     )
 }

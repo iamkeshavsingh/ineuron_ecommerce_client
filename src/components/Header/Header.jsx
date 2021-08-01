@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom'
 
 import './Header.css'
 
-function Header({ isLoggedIn, user }) {
+function Header({ isLoggedIn, user, noOfCartItems }) {
+
     return (
         <Navbar bg="primary" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">MyStore.com</Navbar.Brand>
+                <Link className="brand" to="/">MyStore.com</Link>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Nav className="justify-content-end">
@@ -21,7 +22,7 @@ function Header({ isLoggedIn, user }) {
                                     </Navbar.Text>
                                 </Link>
                                 <Link className="link">
-                                    <Link className="link" to="/cart">Cart</Link>
+                                    <Link className="link" to="/cart">Cart {noOfCartItems}</Link>
                                 </Link>
                                 <Link className="link" href="#pricing">Logout</Link>
                             </React.Fragment>
@@ -42,7 +43,8 @@ var mapStateToProps = (state) => {
 
     return {
         isLoggedIn: state.auth.isLoggedIn,
-        user: state.auth.user
+        user: state.auth.user,
+        noOfCartItems: state.cart.items.length
     }
 }
 
