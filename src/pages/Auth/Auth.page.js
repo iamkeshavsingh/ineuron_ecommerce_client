@@ -4,11 +4,15 @@ import Header from '../../components/Header/Header'
 import Signin from './components/SignIn/Signin'
 import Signup from './components/SignUp/Signup'
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import { Redirect, useLocation } from 'react-router-dom'
+import queryString from 'query-string'
 
 function AuthPage({ isLoggedIn }) {
 
-    if (isLoggedIn) return <Redirect to="/" />
+    var location = useLocation()
+    var redirectUrl = queryString.parse(location.search).redirectUrl;
+    redirectUrl = redirectUrl || '/';
+    if (isLoggedIn) return <Redirect to={redirectUrl} />
 
     return (
         <React.Fragment>
