@@ -9,7 +9,7 @@ const INIT_STATE = {
 
 function getTotal(carts) {
     return carts.reduce((acc, cart) => {
-        return acc + cart.price;
+        return acc + Number(cart.price);
     }, 0);
 }
 

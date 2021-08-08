@@ -1,17 +1,22 @@
 import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/Header/Header";
 import ProductList from "../../components/ProductList/ProductList";
-import { getProducts } from "../../store/actions/products/products.action";
+import Loader from '../../components/Loader/Loader'
+import useProducts from "../../hooks/useProducts";
 
 function Home() {
 
-  var products = useSelector(({ product }) => product.products)
-  var dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getProducts())
-  }, [])
+  var { products, error, isLoading } = useProducts();
+
+  // var {products, isLoading, error } = useSelector(({ product }) => product)
+  // var dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getProducts())
+  // }, [])
+
+  if (error) return null;
+
+  if (isLoading) return <Loader />
 
   return (
     <React.Fragment>

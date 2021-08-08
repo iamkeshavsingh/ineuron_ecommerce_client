@@ -5,6 +5,7 @@ import CartItem from '../CartItem/CartItem'
 
 function CartList({ carts, total }) {
 
+
     function payment_success(payload) {
         console.log(payload)
     }
