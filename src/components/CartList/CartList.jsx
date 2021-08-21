@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { getOrderId } from '../../utils/global.util'
 import CartItem from '../CartItem/CartItem'
 
 function CartList({ carts, total }) {
+
+    var [orderId, setOrderId] = useState({});
 
 
     function payment_success(payload) {
@@ -14,23 +16,30 @@ function CartList({ carts, total }) {
         console.log('Payment Failed')
     }
 
+    useEffect(() => {
+
+        if (!orderId.order_id) return;
+        var options = {
+            ...orderId,
+            handler: payment_success,
+            prefill: {
+                email: 'test@test.com',
+                contact: 8900000000,
+                name: 'John Doe'
+            }
+        }
+
+        var rpay = new window.Razorpay(options);
+        rpay.open();
+
+        rpay.on('payment.failed', payment_failed)
+
+    }, [orderId.order_id]);
+
     function handleCheckout() {
         getOrderId(1500)
             .then(data => {
-                var options = {
-                    ...data,
-                    handler: payment_success,
-                    prefill: {
-                        email: 'test@test.com',
-                        contact: 8900000000,
-                        name: 'John Doe'
-                    }
-                }
-
-                var rpay = new window.Razorpay(options);
-                rpay.open();
-
-                rpay.on('payment.failed', payment_failed)
+                setOrderId(data);
             })
     }
 
